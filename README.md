@@ -1,4 +1,4 @@
-# 🛍️ Daraz - E-Commerce Website
+# 🛍️ Commerzze - E-Commerce Website
 
 A fully functional, beautiful e-commerce platform built with **Next.js**, **TypeScript**, and **Tailwind CSS**, featuring 500+ products and complete shopping functionality.
 
@@ -13,6 +13,9 @@ A fully functional, beautiful e-commerce platform built with **Next.js**, **Type
 - ✅ **Category Navigation** - Browse by 12 different product categories
 - ✅ **Flash Deals** - View all products with discounts up to 60%
 - ✅ **Product Details** - Comprehensive product pages with ratings, reviews, and related items
+- ✅ **Admin Dashboard** - Manage products, orders, and users
+- ✅ **Order Tracking** - Track order status in real-time
+- ✅ **Legal Pages** - Privacy Policy, Terms & Conditions, Shipping & Returns
 - ✅ **Responsive Design** - Fully mobile-friendly interface
 
 ### Product Categories
@@ -159,12 +162,15 @@ Both stores use localStorage for persistence.
 | Deals | `/deals` | Flash deals and discounts |
 | Cart | `/cart` | Shopping cart |
 | Wishlist | `/wishlist` | Saved products |
+| Admin | `/admin` | Admin dashboard |
+| Track Order | `/track-order` | Order tracking page |
+| Profile | `/profile` | User profile management |
 
 ## 🎨 Styling
 
 - **Tailwind CSS** - Utility-first CSS framework
 - **Lucide Icons** - Beautiful icon library
-- **Custom Color Scheme** - Daraz red (#EE4D2D) theme
+- **Custom Color Scheme** - Commerzze red (#EE4D2D) theme
 - **Responsive Design** - Mobile, tablet, and desktop optimized
 
 ## 📱 Device Support
@@ -216,6 +222,7 @@ Products are dynamically generated with:
 - npm version: 8+
 - Build time: ~30 seconds
 - Bundle size: Optimized
+- **Version**: 2.0.0
 
 ## 🚀 Future Enhancements
 
@@ -234,7 +241,7 @@ Feel free to customize and enhance this template for your needs.
 
 ## 📄 License
 
-**Non-Commercial License** - This project is for educational and portfolio purposes only. Commercial use is strictly prohibited without prior written consent.
+**Non-Commercial License** - This project is for educational and portfolio purposes only. Commercial use is strictly prohibited. If you want to use this for commercial purpose, you can contact me to purchase this project.
 
 ## 📞 Support
 
@@ -242,4 +249,4 @@ For issues or questions, please check the documentation or create an issue in th
 
 ---
 
-**Happy Shopping!** 🎉 Build your e-commerce dreams with Daraz template.
+**Happy Shopping!** 🎉 Build your e-commerce dreams with Commerzze template.
