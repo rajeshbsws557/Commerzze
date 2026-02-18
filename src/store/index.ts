@@ -69,6 +69,7 @@ export const useCartStore = create<CartStore>()(
     }),
     {
       name: 'cart-storage',
+      version: 1,
     }
   )
 );
@@ -105,6 +106,7 @@ export const useWishlistStore = create<WishlistStore>()(
     }),
     {
       name: 'wishlist-storage',
+      version: 1,
     }
   )
 );

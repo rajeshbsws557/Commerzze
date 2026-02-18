@@ -40,6 +40,7 @@ export const useOrderStore = create<OrderStore>()(
         }),
         {
             name: 'order-storage',
+            version: 1,
         }
     )
 );

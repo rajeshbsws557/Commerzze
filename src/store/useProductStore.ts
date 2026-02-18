@@ -59,6 +59,7 @@ export const useProductStore = create<ProductStore>()(
             // However, to avoid overriding new deployment updates with old local data
             // indiscriminately, we might want versioning, but for this task,
             // simple persistence is enough.
+            version: 1, // Bump version to invalidate old random-ID cache
         }
     )
 );
