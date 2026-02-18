@@ -197,19 +197,50 @@ const productNames: Record<string, string[]> = {
   ],
 };
 
-function generateProductId(): string {
-  return `prod_${Math.random().toString(36).substr(2, 9)}`;
+// Seeded Random Number Generator (Linear Congruential Generator)
+class SeededRNG {
+  private seed: number;
+
+  constructor(seed: number) {
+    this.seed = seed;
+  }
+
+  // Returns a pseudo-random number between 0 and 1
+  next(): number {
+    this.seed = (this.seed * 9301 + 49297) % 233280;
+    return this.seed / 233280;
+  }
+
+  // Returns a pseudo-random integer between min and max (inclusive)
+  range(min: number, max: number): number {
+    return Math.floor(this.next() * (max - min + 1)) + min;
+  }
+
+  // Returns a random element from an array
+  pick<T>(array: T[]): T {
+    return array[Math.floor(this.next() * array.length)];
+  }
 }
 
-function getRandomElement<T>(array: T[]): T {
-  return array[Math.floor(Math.random() * array.length)];
+// Generate a deterministic numeric seed from a string
+function stringToSeed(str: string): number {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32bit integer
+  }
+  return Math.abs(hash);
 }
 
-function getRandomNumber(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+// Generate a readable, deterministic slug ID
+function generateSlugId(name: string): string {
+  return 'prod_' + name.toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
 }
 
-// Generate products
+// Generate products deterministically
 export const PRODUCTS: Product[] = [];
 
 for (const category of categories) {
@@ -220,26 +251,33 @@ for (const category of categories) {
 
   for (let index = 0; index < categoryProducts.length; index++) {
     const productName = categoryProducts[index];
-    // deterministically pick an image so it stays consistent for the same product name index
+
+    // Create a seeded RNG specific to this product
+    // ensure price/rating/stock are tied solely to the product name
+    const rng = new SeededRNG(stringToSeed(productName));
+
     const imageUrl = categoryImages[index % categoryImages.length];
 
-    const basePrice = getRandomNumber(500, 50000);
-    const discount = getRandomNumber(0, 60);
+    const basePrice = rng.range(500, 50000);
+    const discount = rng.range(0, 60);
     const discountedPrice = Math.floor(basePrice * (1 - discount / 100));
 
+    // Use deterministic ID based on the name
+    const productId = generateSlugId(productName);
+
     PRODUCTS.push({
-      id: generateProductId(),
+      id: productId,
       title: productName,
       image: imageUrl,
       price: discountedPrice,
       originalPrice: basePrice,
       discount: discount,
-      rating: getRandomNumber(35, 50) / 10,
-      reviews: getRandomNumber(10, 5000),
+      rating: rng.range(35, 50) / 10,
+      reviews: rng.range(10, 5000),
       category: category,
-      seller: getRandomElement(sellers),
-      stock: getRandomNumber(0, 100),
-      description: `Description for ${productName}. This is a high quality product.`,
+      seller: rng.pick(sellers),
+      stock: rng.range(0, 100),
+      description: `Description for ${productName}. This is a high quality product in the ${category} category provided by ${rng.pick(sellers)}. Features durable materials and excellent performance.`,
     });
   }
 }
